@@ -7,8 +7,8 @@ namespace Dukawaremallweb.Helpers
     {
         public bool UttambsolutionssendemailAsync(string to, string subject, string body, bool IsBodyHtml)
         {
-            string senderEmail = "uttambsolutionssale@gmail.com";
-            string appPassword = "ozvtcxongpnhileq";
+            string senderEmail = "";
+            string appPassword = "";
 
             MailMessage mail = new MailMessage(senderEmail, to);
             mail.IsBodyHtml = IsBodyHtml;
