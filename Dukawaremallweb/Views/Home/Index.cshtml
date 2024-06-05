@@ -1,8 +1,103 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Dukawaremallweb.Models.Shop.ShopProductDetailData>
+@{
+    ViewData["Title"] = "Index";
 }
+@* <div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search">
+        </div>
+    </div>
+</div> *@
+<div class="row">
+    @if (Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-xl-2 col-lg-3 col-sm-6 mb-3">
+                <a asp-action="Productdetails" asp-controller="Home" asp-area="" asp-route-code="@Guid.NewGuid()" asp-route-Productid="@item.Productid" class="text-dark" data-target="#FuelcardsystemproductsModal" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                    <div class="card text-center h-80 m-0">
+                        <div class="card-body">
+                            <img class="card-img-top mb-0" src="@item.Productimageurl" alt="Product Image @item.Productname">
+                            <h5 class="card-text text-sm nowrap text-nowrap mb-0">@item.Productname</h5>
+                            <h5 class="card-text text-sm">@item.Shopname</h5>
+                            <p class="card-text text-xs mb-0">@item.Categoryname</p>
+                            <p class="card-text text-sm mb-0">@item.Subcategoryname</p>
+                            <p class="card-text text-xs text-nowrap mb-0 nowrap"><span class="text-decoration-line-through">Ksh. @item.Oldproductprice.ToString("#,##0.00")</span>&nbsp;&nbsp <span>Ksh. @item.Productprice.ToString("#,##0.00")</span></p>
+                            <button href="#" class="add-to-cart btn btn-xs btn-outline-info text-info font-weight-bold text-uppercase text-center" data-productid="@item.Productid" data-shopid="@item.Shopid">Add to cart</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        }
+    }
 </div>
+@* <div class="row">
+    <div class="col-sm-12">
+        <div id="resultContainer"></div>
+    </div>
+</div>
+ *@
+@section Scripts {
+    <script type="text/javascript">
+        $('.add-to-cart').on('click', function () {
+            var uil1 = { ProductId: $(this).data('productid'), ShopId: $(this).data('shopid') };
+            $.post("/Home/Addtocart", uil1, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Cart Item Not Saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+            });
+
+        });
+
+        // $(document).ready(function () {
+        //     var offset = 0; // Initial offset
+        //     var limit = 10; // Number of items per page
+
+        //     // Function to fetch data from the server
+        //     function fetchData() {
+        //         var query = $('#searchInput').val(); // Get search query
+        //         $.ajax({
+        //             url: '/Home/GetUttambSolutionShopProducts',
+        //             method: 'GET',
+        //             data: { query: query, offset: offset, limit: limit },
+        //             success: function (response) {
+        //                 $('#resultContainer').html(response);
+        //             },
+        //             error: function (xhr, status, error) {
+        //                 console.error('Error:', error);
+        //             }
+        //         });
+        //     }
+           
+
+        //     // Initial data fetch
+        //     fetchData();
+
+        //     // Search input event listener
+        //     $('#searchInput').on('input', function () {
+        //         offset = 0; // Reset offset when search query changes
+        //         fetchData();
+        //     });
+
+        //     // Pagination button event listeners
+        //     $('#prevPageBtn').on('click', function () {
+        //         offset -= limit;
+        //         if (offset < 0) offset = 0; // Ensure offset doesn't go below 0
+        //         fetchData();
+        //     });
+
+        //     $('#nextPageBtn').on('click', function () {
+        //         offset += limit;
+        //         fetchData();
+        //     });
+        // });
+    </script>
+}

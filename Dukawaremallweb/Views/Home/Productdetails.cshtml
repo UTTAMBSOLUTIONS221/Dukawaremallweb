@@ -1,0 +1,23 @@
+﻿@model Dukawaremallweb.Models.Shop.ShopProductDetailData
+<div class="modal-header">
+    <h5 class="text-sm modal-title" id="SocialPesaModalLabel">@Model.Productname Detail</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xl-7 col-lg-8 col-sm-12 mb-3">
+            <div class="card text-center h-80 m-0">
+                <div class="card-body">
+                    <img class="card-img-top mb-0" src="@Model.Productimageurl" alt="Product Image @Model.Productname">
+                    <h5 class="card-text text-sm nowrap text-nowrap mb-0">@Model.Productname</h5>
+                    <h5 class="card-text text-sm">@Model.Shopname</h5>
+                    <p class="card-text text-xs mb-0">@Model.Categoryname</p>
+                    <p class="card-text text-sm mb-0">@Model.Subcategoryname</p>
+                    <p class="card-text text-xs text-nowrap mb-0 nowrap"><span class="text-decoration-line-through">Ksh. @Model.Oldproductprice.ToString("#,##0.00")</span>&nbsp;&nbsp <span>Ksh. @Model.Productprice.ToString("#,##0.00")</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

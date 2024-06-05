@@ -1,0 +1,113 @@
+﻿@model List<Dukawaremallweb.Models.Cart.Item>
+@{
+    ViewData["Title"] = "Customercheckout";
+    Layout = "~/Views/Shared/_Customerlayout.cshtml";
+}
+<form id="form_id">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-xs text-info">ORDER CONFIRMATION AND PAYMENTS</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-7 table-responsive">
+                    <table class="table table-sm table-bordered table-striped">
+                        <thead class="bg-info text-white font-weight-lighter">
+                            <tr>
+                                <th class="font-weight-light text-sm">Item</th>
+                                <th class="font-weight-light text-sm">Price</th>
+                                <th class="font-weight-light text-sm">Units</th>
+                                <th align="right" class="font-weight-light text-sm">Amount</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="font-weight-lighter">
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="font-weight-lighter text-sm"><img src="@Url.Content(@item.Product.Productimageurl)" width="50" height="40" /> <br />@item.Product.Productname</td>
+                                    <td class="font-weight-lighter text-sm">@item.Product.Productprice.ToString("#,##0.00")</td>
+                                    <td class="font-weight-lighter text-sm">@item.Quantity</td>
+                                    <td align="right" class="font-weight-lighter text-sm">@(item.Product.Productprice * item.Quantity)</td>
+                                </tr>
+                            }
+                            <tr class="bg-white">
+                                <td colspan="3">Total </td>
+                                <td align="right" class="font-weight-light"><input hidden id="Carttotal" name="Carttotal" value="@Model.Sum(item => item.Product.Productprice * item.Quantity)" /> KES. @Model.Sum(item => item.Product.Productprice * item.Quantity)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="text-xs text-info">DELIVERY ADDRESS</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <input name="Deliveryid" value="1" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="text-xs text-info">PAY VIA MPESA</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-borderless table-sm">
+                                                <tbody>
+                                                    <tr><td class="font-weight-lighter text-sm">Total Amount: Kes. @Model.Sum(item => item.Product.Productprice * item.Quantity)</td></tr>
+                                                    <tr><td class="font-weight-lighter text-sm">Service Fee: Kes. @(0.3 * Convert.ToDouble(Model.Sum(item => item.Product.Productprice * item.Quantity)))</td></tr>
+                                                    <tr><td class="font-weight-lighter text-sm">Delivery Fee: <span id="Deliveryfee"></span></td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-info btn-sm font-weight-bold text-uppercase text-xs float-right" type="button" onclick="OnClick();">CONFIRM</button>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    <script type="text/javascript">
+        function OnClick() {
+            // if ($('#startdate').val() == "" || $('#enddate').val() == "") {
+            //     alert("Fill all required fields.");
+            //     return;
+            // }
+            $('.blockOverlay').show();
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Confirmcustomercheckout", "Customer")",
+                data: dataObject(),
+                success: function (response, status, xhr) {
+                    Swal.fire('Saved!', response.RespStatus, 'success')
+                    window.location.href = '/Customer/Customerorderdetail?Orderid='+response.Data1;
+                },
+                error: function (error) {
+                    console.error("Error creating order:", error);
+                    $('.blockOverlay').hide();
+                }
+            });
+        }
+    </script>
+}

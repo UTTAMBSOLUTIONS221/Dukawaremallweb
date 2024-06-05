@@ -1,0 +1,40 @@
+﻿@model Dukawaremallweb.Entities.Customer.Systemcustomershop
+@{
+    var Systemphonecodes = ViewData["Systemphonecodelists"] as List<SelectListItem>;
+}
+<div class="modal-header">
+    <h5 class="text-sm modal-title" id="SocialPesaModalLabel">Shop Detail Data</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row" hidden>
+        <input class="form-control form-control-sm" asp-for="@Model.Customerid" id="Customerid" />
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="font-weight-light">Shop Name</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Shopname" id="ShopnameId" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="font-weight-light">Phone Number</label>
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <select class="form-control form-control-sm font-weight-light input-group-text" id="inputGroup-sizing-sm" asp-for="@Model.Phoneid" asp-items="@Systemphonecodes">
+                            <option value="0">Phonecode</option>
+                        </select>
+                    </div>
+                    <input type="number" class="form-control form-control-sm" aria-label="Small" id="PhonenumberId" asp-for="@Model.Shopphone" aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" onclick="savesystemshopdetails();">Add</button>
+</div>

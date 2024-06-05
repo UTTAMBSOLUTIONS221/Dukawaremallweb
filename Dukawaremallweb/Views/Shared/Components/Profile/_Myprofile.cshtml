@@ -1,0 +1,77 @@
+﻿@model Dukawaremallweb.Models.Auth.Customermodeldataresponce
+<aside class="main-sidebar sidebar-white bg-white position-fixed">
+    <a asp-controller="Home" asp-action="Customershop" class="brand-link bg-white">
+        <img src="~/imgs/dukawaremalllogo.png" alt="DUKAWARE MALL" class="brand-image img-circle" style="opacity: .8">
+        <span class="brand-text font-weight-bold text-dark text-muted text-uppercase">DUKAWARE MALL</span>
+    </a>
+    <div class="sidebar">
+        <nav class="mt-2">
+            <div class="row text-center">
+                <div class="col-sm-12 box-profile">
+                    <div class="text-center">
+                        <img class="profile-user-img img-fluid img-circle" src="@Url.Content(Model.Profileimage)" alt="@Model.Fullname">
+                    </div>
+                    <h3 class="profile-username text-center">@Model.Fullname</h3>
+                    @if (Model.Designation == "Propertyowner")
+                    {
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                           @*  <li id="CAN_VIEW_SYSTEM_PRODUCTS" class="nav-item has-treeview main">
+                                <a href="javascript: void(0);" class="nav-link">
+                                    <i class="nav-icon fa fa-cogs"></i><p>Settings<i class="fa fa-angle-left right"></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item  ml-2 main" id="CAN_VIEW_SYSTEM_PRODUCT_BRANDS_LISTINGS">
+                                        <a asp-controller="SettingsManagement" asp-action="Systemmoduleslist" asp-area="" class="nav-link">
+                                            <i class="nav-icon fas fa-list"></i><p>Modules</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li> *@
+                            <li id="CAN_VIEW_SYSTEM_PRODUCTS" class="nav-item has-treeview main">
+                                <a href="javascript: void(0);" class="nav-link">
+                                    <i class="nav-icon fa fa-building"></i><p>Rentals<i class="fa fa-angle-left right"></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item  ml-2 main" id="CAN_VIEW_SYSTEM_PRODUCT_BRANDS_LISTINGS">
+                                        <a asp-controller="TenantManagement" asp-action="Systemrentallist" asp-area="" class="nav-link">
+                                            <i class="nav-icon fas fa-list"></i><p>Rentals</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ml-2 main" id="CAN_VIEW_SYSTEM_PRODUCT_BRANDS_LISTINGS">
+                                        <a asp-controller="TenantManagement" asp-action="Systemtenantlist" asp-area="" class="nav-link">
+                                            <i class="nav-icon fas fa-list"></i><p>Tenants</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        @if (!Model.Isshop)
+                        {
+                            <ul class="list-group list-group-unbordered mb-3 text-center">
+                                <li class="list-group-item">
+                                    <b>Loyalty Point</b> <a class="float-right">@Model.Customerpoint.ToString("#,##0.00")</a>
+                                </li>
+                            </ul>
+                        }
+                        @if (Model.Isverified)
+                        {
+                            <a asp-controller="Customer" asp-action="Myshopdata" asp-area="" asp-route-code="@Guid.NewGuid()" asp-route-Shopid="@Model.Shopid" class="text-info text-uppercase text-center">Verify</a>
+                        }
+                        @if (Model.Isshop)
+                        {
+                            <a asp-controller="Customer" asp-action="Myshopdata" asp-area="" asp-route-code="@Guid.NewGuid()" asp-route-Shopid="@Model.Shopid" class="text-info text-uppercase text-center">@Model.Shopname</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Customer" asp-action="Setupcustomershop" asp-area="" asp-route-code="@Guid.NewGuid()" asp-route-Customerid="@Model.CustomerId" data-target="#FuelcardsystemModal" data-toggle="modal" data-backdrop="static" data-keyboard="false" class="text-info text-uppercase text-center">Setup shop</a>
+                        }
+                    }
+                    
+                </div>
+            </div>
+        </nav>
+    </div>
+</aside>

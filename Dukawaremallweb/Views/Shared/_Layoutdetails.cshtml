@@ -1,0 +1,104 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="keywords" content="online shopping, electronics, fashion, DUKAWARE MALL">
+    <meta name="description" content="Explore a wide range of products at DUKAWARE MALL. Find everything you need, from electronics to fashion, all in one place.">
+    <link rel="canonical" href="http://dukawaremall.socialpesa.com/" />
+    <title>DUKAWARE MALL - Your One-Stop Shopping Destination</title>
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="Website" />
+    <meta property="og:title" content="@ViewData["title"]" />
+    <meta property="og:description" content="@ViewData["description"]" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="@ViewData["image"]" />
+    <meta property="og:url" content=" @ViewData["url"]" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-toggle/css/bootstrap2-toggle.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link href="~/lib/plugins/summernote/summernote.min.css" rel="stylesheet" />
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <style type="text/css">
+        textarea {
+            resize: none;
+        }
+    </style>
+    @RenderSection("Css", required: false)
+</head>
+<body class="hold-transition layout-top-nav layout-fixed layout-navbar-fixed">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0" nonce="yjmmwWe0"></script>
+
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand-md navbar-white">
+            <div class="container-fluid">
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                    <img src="~/imgs/apple-touch-icon.png" alt="DUKAWARE MALL Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <span class="brand-text font-weight-bold text-info" style="color: #0A506C !important">DUKAWARE MALL</span>
+                </a>
+                <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+
+
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="container-fluid">
+                    <main role="main" class="pb-3 mt-2 pt-2">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+
+        </div>
+        <footer class="main-footer text-center bg-light">
+            <p class="text-xs font-weight-normal">&copy; 2020 - @DateTime.Now.Year <a class="text-info" href="https://uttambsolutions.com/" target="_blank">Uttamb Solutions</a>. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="~/lib/plugins/jquery/jquery.min.js"></script>
+    <script src="~/lib/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/lib/bootstrap-toggle/js/bootstrap2-toggle.min.js"></script>
+    <script src="~/lib/plugins/summernote/summernote.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/js/socialpesamanagementjavascript.js"></script>
+    @RenderSection("Scripts", required: false)
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script type="application/ld+json">
+        {
+          "context": "http://schema.org",
+          "type": "WebSite",
+          "name": "DUKAWARE MALL",
+          "url": "http://dukawaremall.socialpesa.com/",
+          "description": "Your One-Stop Shopping Destination"
+        }
+    </script>
+
+</body>
+</html>

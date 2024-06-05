@@ -1,0 +1,100 @@
+﻿@model Dukawaremallweb.Entities.Customer.SystemCustomer
+@{
+    Layout = null;
+    var Systemphonecodes = ViewData["Systemphonecodelists"] as List<SelectListItem>;
+    var Systemoutletcodes = ViewData["Systemoutletslists"] as List<SelectListItem>;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UTTAMB SOLUTION | SIGNUPCUSTOMER</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-info card-outline">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg font-weight-light text-dark text-uppercase font-weight-bold">Signup to join uttamb solutions</p>
+                <div class="row" style="display:none">
+                    <div class="col-sm-12">
+                        <input id="customerId" asp-for="@Model.CustomerId" />
+                        <input id="customerDesgnationId" asp-for="@Model.Designation" value="Normalcustomer" />
+                        <input id="customerDesgnationId" asp-for="@Model.CountryId" />
+                        <input id="customergenderId" asp-for="@Model.Gender" />
+                        <input id="customerreferencenumberId" asp-for="@Model.ReferenceNumber" />
+                        <input class="form-control form-control-sm" id="customeridnumberId" asp-for="@Model.IDNumber" />
+                        <input class="form-control form-control-sm" asp-for="@Model.NoOfTransactionPerDay" id="NoOfTransactionPerDayId" />
+                        <input class="form-control form-control-sm" asp-for="@Model.AmountPerDay" id="AmountPerDayId" />
+                        <input class="form-control form-control-sm" asp-for="@Model.ConsecutiveTransTimeMin" id="ConsecutiveTransTimeMinId" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="font-weight-light">Firstname</label>
+                            <input class="form-control form-control-sm" id="firstnameId" asp-for="@Model.Firstname" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="font-weight-light">Lastname</label>
+                            <input class="form-control form-control-sm" id="lastnameId" asp-for="@Model.Lastname" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="font-weight-light">Emailaddress</label>
+                            <input type="email" class="form-control form-control-sm" id="emailaddressId" asp-for="@Model.Emailaddress" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="font-weight-light">Phone Number</label>
+                            <div class="input-group input-group-sm mb-3 mx-2">
+                                <div class="input-group-prepend">
+                                    <select class="form-control form-control-sm font-weight-light input-group-text" id="inputGroup-sizing-sm" asp-for="@Model.Phoneid" asp-items="@Systemphonecodes">
+                                        <option value="0">Phonecode</option>
+                                    </select>
+                                </div>
+                                <input type="number" class="form-control form-control-sm" aria-label="Small" id="PhonenumberId" asp-for="@Model.Phonenumber" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="font-weight-light">Outlet</label>
+                            <select class="form-control form-control-sm font-weight-light" id="CustomerstationId" asp-for="@Model.StationId" asp-items="@Systemoutletcodes">
+                                <option value="0">--Select Outlet ---</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-9">
+                        Already have account? <a asp-action="Signinuser" asp-controller="Customer" class="text-uppercase font-weight-bold text-info text-xs">Signin</a>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-sm btn-info font-weight-bold" type="button" onclick="savesystemcustomerdata();">Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/dist/adminlte.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/js/systemcustomerjavascript.js"></script>
+</body>
+</html>

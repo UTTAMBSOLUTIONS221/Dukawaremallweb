@@ -1,0 +1,48 @@
+﻿@model List<Dukawaremallweb.Models.Cart.Item>
+@{
+    ViewData["Title"] = "Customercart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model == null)
+{
+    <span class="dropdown-item p-3 float-right text-muted text-sm">No Items in the cart. Shop Now</span>
+}
+else
+{
+    <div class="row">
+        <div class="col-sm-12 table-responsive">
+            <table class="table table-sm table-bordered table-striped">
+                <thead class="bg-info text-white font-weight-lighter">
+                    <tr>
+                        <th class="font-weight-light text-xs">Item</th>
+                        <th class="font-weight-light text-xs">Price</th>
+                        <th class="font-weight-light text-xs">Units</th>
+                        <th class="font-weight-light text-xs">Amount</th>
+                        <th class="font-weight-light text-xs text-nowrap">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody class="font-weight-lighter">
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="font-weight-lighter text-xs" hidden><input hidden id="Productdata" name="Productdata" value="@item.Product.Productid,@item.Product.Productprice,@item.Quantity,@(item.Product.Productprice * item.Quantity)" /> @item.Product.Productid</td>
+                            <td class="font-weight-lighter text-xs"><img src="@Url.Content(@item.Product.Productimageurl)" width="50" height="40" /> <br />@item.Product.Productname</td>
+                            <td class="font-weight-lighter text-xs">@item.Product.Productprice.ToString("#,##0.00")</td>
+                            <td class="font-weight-lighter text-xs">@item.Quantity</td>
+                            <td class="font-weight-lighter text-xs">@(item.Product.Productprice * item.Quantity)</td>
+                            <td class="text-nowrap"><a data-code="@Guid.NewGuid()" data-ProductId="@item.Product.Productid" data-ShopId="@item.Product.Shopid" onclick="Incrementitemtoshoppingcart()" class="text-white btn btn-sm btn-info ml-1">+</a><a data-code="@Guid.NewGuid()" data-ProductId="@item.Product.Productid" data-ShopId="@item.Product.Shopid" onclick="Decrementitemtoshoppingcart()" class="text-white btn btn-sm btn-info ml-1">-</a><a data-code="@Guid.NewGuid()" data-ProductId="@item.Product.Productid" data-ShopId="@item.Product.Shopid" onclick="Removeitemtoshoppingcart()" class="text-white btn btn-sm btn-danger ml-1">x</a></td>
+                        </tr>
+                    }
+                    <tr class="bg-white">
+                        <td align="right" colspan="6" class="font-weight-light text-xs"><input hidden id="Carttotal" name="Carttotal" value="@Model.Sum(item => item.Product.Productprice * item.Quantity)" />Total  KES. @Model.Sum(item => item.Product.Productprice * item.Quantity)</td>
+                    </tr>
+                    <tr>
+                        <td align="right" colspan="6"><a asp-action="Customercheckout" asp-controller="Customer" asp-route-code="@Guid.NewGuid()" asp-area="" class="btn btn-info btn-xs font-weight-bold text-uppercase text-xs">Checkout</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
